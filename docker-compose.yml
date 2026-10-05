@@ -1,0 +1,14 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=gethomepage.dev # Requerido, puede necesitar puerto. Ver gethomepage.dev/installation/#homepage_allowed_hosts
+      - PUID=1000 # Opcional, tu ID de usuario
+      - PGID=1000 # Opcional, tu ID de grupo
+    ports:
+      - "3000:3000"
+    volumes:
+      - /path/to/config:/app/config # Asegúrate de que tu directorio de configuración local exista
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Opcional, para integraciones Docker
+    restart: unless-stopped
